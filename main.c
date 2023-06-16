@@ -7,6 +7,8 @@
 #include <allegro5/allegro_font.h>
 
 #include "libs/player.h"
+#include "libs/enemies.h"
+#include "libs/score.h"
 
 void run();
 
@@ -47,6 +49,9 @@ void run(){
 	int x = dw / 2;
 	int y = dh / 2;
 	int center = 0;
+	int e_center = 0;
+
+	int score = 0;
 
 	bool shooting = false;
 
@@ -57,7 +62,10 @@ void run(){
 
 	char *labelx = "x = ";
 	char *labely = "y = ";
-	char *coordx; 
+	char *labels = "score:";
+	char *coordx;
+
+	int (*spointer)[1000] = get_s_coords();
 
 	/* Movement Variables */
 	int k = 5;
@@ -74,7 +82,8 @@ void run(){
 
 		/* The drawwwwing */
 		//rect_hitbox_draw(x, y, 10, 10, hitbox);
-		
+
+		// player
 		shift = al_key_down(&state, ALLEGRO_KEY_LSHIFT);
 		if(shift){
 			k = 5;
@@ -85,7 +94,7 @@ void run(){
 			rect_hitbox_draw(x, y, 10, 10, palette[2]);
 		}
 
-		moving(&state, &x, &y, dw, dh, k);
+		moving(&state, &x, &y, dw - 165, dh, k);
 
 		if(al_key_down(&state, ALLEGRO_KEY_Z)){
 			center = get_center(x, 10);
@@ -103,6 +112,15 @@ void run(){
 
 		al_draw_text(tex, palette[3], 0, 20, 0, labely);
 		al_draw_text(tex, palette[3], 40, 20, 0, coordx);
+
+		// enemies
+		e_center = get_enemy_center(30, 10);
+		draw_enemy_hitbox(30, 40);
+		enemy_collision(100, spointer, 30, 10, &score);
+
+		sprintf(coordx, "%d", score);
+		al_draw_text(tex, palette[4], 500, 100, 0, coordx);
+		al_draw_text(tex, palette[4], 500, 80, 0, labels);
 
 		// make operations visible
 		al_flip_display();

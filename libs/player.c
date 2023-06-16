@@ -44,6 +44,11 @@ void init_s_coords(int max){
 	}
 }
 
+int (*get_s_coords(void))[1000]{
+	int (*spointer)[1000] = s_coords;
+	return spointer;
+}
+
 void shoot(int center, int y, int vel, const int max, bool *shooting){
 	bool restart;
 
@@ -56,15 +61,10 @@ void shoot(int center, int y, int vel, const int max, bool *shooting){
 
 	restart = n > max;
 	//(restart) ? n = 0 : n++;
-	if(restart){
-		n = 0;
-	}
-	else{
-		n++;
-	}
+	if(restart) n = 0;
 
 	for(int i = 0; i < max; i++){
-		if(s_coords[i] <= 0 && s_coords[0][i] >= y){
+		if(s_coords[0][i] <= 0 && s_coords[0][i] >= y){
 			s_coords[0][i] = y;
 			vel_s[i] = 0;
 		}
@@ -82,5 +82,5 @@ void shoot(int center, int y, int vel, const int max, bool *shooting){
 	}
 
 	*shooting = false;
-
+	n++;
 }
