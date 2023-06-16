@@ -86,7 +86,7 @@ void run(){
 		// player
 		shift = al_key_down(&state, ALLEGRO_KEY_LSHIFT);
 		if(shift){
-			k = 5;
+			k = 3;
 			rect_hitbox_draw(x, y, 10, 10, palette[1]);
 		}
 		else {
@@ -115,8 +115,8 @@ void run(){
 
 		// enemies
 		e_center = get_enemy_center(30, 10);
-		draw_enemy_hitbox(30, 40);
-		enemy_collision(100, spointer, 30, 10, &score);
+		draw_enemy_hitbox(200, 60);
+		enemy_collision(100, spointer, 200, 60, &score);
 
 		sprintf(coordx, "%d", score);
 		al_draw_text(tex, palette[4], 500, 100, 0, coordx);

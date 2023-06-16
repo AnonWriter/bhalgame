@@ -4,7 +4,8 @@
 void draw_enemy_hitbox(int x, int y);
 int get_enemy_center(int x, int xf);
 
-void enemy_collision(const int a_size, int (*shoots)[a_size], int x, int y, int *score);
+bool enemy_collision(const int a_size, int (*shoots)[a_size], int x, int y, int *score);
+void destroy_enemy();
 
 /*
 int * get_eshoots_array();

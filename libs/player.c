@@ -50,6 +50,7 @@ int (*get_s_coords(void))[1000]{
 }
 
 void shoot(int center, int y, int vel, const int max, bool *shooting){
+	int n;
 	bool restart;
 
 	int vel_s[1000];

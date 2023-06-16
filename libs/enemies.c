@@ -22,8 +22,8 @@ int get_enemy_center(int x, int xf){
 }
 
 int sfactor = 0;
-void enemy_collision(const int a_size, int (*shoots)[1000], int x, int y, int *score){
-
+bool enemy_collision(const int a_size, int (*shoots)[1000], int x, int y, int *score){
+	bool hit;
 	bool within_x;
 	bool within_y;
 
@@ -32,9 +32,11 @@ void enemy_collision(const int a_size, int (*shoots)[1000], int x, int y, int *s
 		within_y = shoots[0][i] >= y && (shoots[0][i] + 5) <= y + 30;
 		if(within_x && within_y){
 			//printf("collision in %d at cycle %d\n", shoots[0][i], i);
+			hit = true;
 			(*score)++;
 		}
 	}
+	return hit;
 }
 
 /*
